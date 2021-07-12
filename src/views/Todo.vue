@@ -26,6 +26,16 @@
                 {{ item.title }}
               </v-list-item-title>
             </v-list-item-content>
+
+            <v-list-item-action>
+              <v-btn icon
+                     @click.stop="handleDeleteTask(item.id)"
+                     :disabled="item.done === false"
+              >
+                <v-icon v-show="item.done === true"
+                        color="red lighten-1">mdi-delete</v-icon>
+              </v-btn>
+            </v-list-item-action>
           </template>
         </v-list-item>
         <v-divider></v-divider>
@@ -69,6 +79,9 @@
       handleDoneTask(id) {
         let cur_task = this.tasks.filter(task => task.id === id)
         cur_task[0].done = !cur_task[0].done
+      },
+      handleDeleteTask(id) {
+        this.tasks = this.tasks.filter(task => task.id !== id)
       }
     }
   }
