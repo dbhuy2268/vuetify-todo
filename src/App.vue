@@ -41,8 +41,8 @@
         app
         color="#fcb69f"
         dark
-        src="https://picsum.photos/1920/1080?random"
         prominent
+        flat
     >
       <template v-slot:img="{ props }">
         <v-img
@@ -51,9 +51,9 @@
         ></v-img>
       </template>
 
-      <v-app-bar-nav-icon></v-app-bar-nav-icon>
+      <v-app-bar-nav-icon @click="drawer = !drawer" />
 
-      <v-app-bar-title>Title</v-app-bar-title>
+      <v-app-bar-title>todos</v-app-bar-title>
 
       <v-spacer></v-spacer>
 
@@ -81,7 +81,7 @@ export default {
   data: () => ({
     drawer: null,
     items: [
-      { title: 'Dashboard', icon: 'mdi-format-list-checks', to: '/' },
+      { title: 'Todo list', icon: 'mdi-format-list-checks', to: '/' },
       { title: 'About', icon: 'mdi-help-box', to: '/about' },
     ],
   }),
