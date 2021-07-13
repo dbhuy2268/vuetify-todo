@@ -48,17 +48,7 @@
 
       <v-spacer></v-spacer>
 
-      <v-btn icon>
-        <v-icon>mdi-magnify</v-icon>
-      </v-btn>
-
-      <v-btn icon>
-        <v-icon>mdi-heart</v-icon>
-      </v-btn>
-
-      <v-btn icon>
-        <v-icon>mdi-dots-vertical</v-icon>
-      </v-btn>
+      <a target="_blank" rel="noopener noreferrer" style="text-decoration: none;" href="https://github.com/dbhuy2268/vuetify-todo/tree/main/src"><v-icon>mdi-github</v-icon></a>
     </v-app-bar>
     <v-main>
       <router-view></router-view>
