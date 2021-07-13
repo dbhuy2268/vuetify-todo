@@ -39,21 +39,12 @@
     </v-navigation-drawer>
     <v-app-bar
         app
-        color="#fcb69f"
-        dark
-        prominent
-        flat
+        color="white"
+        elevate-on-scroll
     >
-      <template v-slot:img="{ props }">
-        <v-img
-            v-bind="props"
-            gradient="to top right, rgba(19,84,122,.5), rgba(128,208,199,.8)"
-        ></v-img>
-      </template>
+      <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon>
 
-      <v-app-bar-nav-icon @click="drawer = !drawer" />
-
-      <v-app-bar-title>todos</v-app-bar-title>
+      <v-toolbar-title>todos</v-toolbar-title>
 
       <v-spacer></v-spacer>
 
