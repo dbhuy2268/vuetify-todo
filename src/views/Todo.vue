@@ -6,24 +6,24 @@
         outlined
         label="What needs to be done?"
         append-icon="mdi-plus"
-        @click:append="handleAddTask"
-        @keyup.enter="handleAddTask"
+        @click:append="addTask"
+        @keyup.enter="addTask"
         :hide-details="true"
         clearable
         v-model="taskTitle"
     ></v-text-field>
 
     <v-list
-        v-if="tasks.length"
+        v-if="$store.state.tasks.length"
         flat
     >
       <div
-          v-for="item in this.tasks"
+          v-for="item in $store.state.tasks"
           :key="item.id"
       >
         <v-list-item
             class="list-action-hover"
-            @click="handleDoneTask(item.id)"
+            @click="doneTask(item.id)"
             :class="{'grey lighten-4': item.done}"
         >
           <template v-slot:default>
@@ -49,7 +49,7 @@
               <v-btn
                   class="hover-close"
                   icon
-                  @click.stop="handleDeleteTask(item.id)"
+                  @click.stop="deleteTask(item.id)"
               >
                 <v-icon color="lighten-1">mdi-close</v-icon>
               </v-btn>
@@ -72,7 +72,6 @@
 </template>
 
 <script>
-
   import axios from "axios";
 
   export default {
@@ -81,7 +80,6 @@
       return {
         emptyQuote: {},
         taskTitle: '',
-        tasks: []
       }
     },
     created() {
@@ -93,24 +91,16 @@
           });
     },
     methods: {
-      handleAddTask(){
-        if (this.taskTitle !== ''){
-          let newTask = {
-            id: Date.now(),
-            title: this.taskTitle,
-            done: false
-          }
-          this.tasks.push(newTask)
-          this.taskTitle = ''
-        }
+      addTask(){
+        this.$store.commit('handleAddTask', this.taskTitle)
+        this.taskTitle = ''
       },
-      handleDoneTask(id) {
-        let cur_task = this.tasks.filter(task => task.id === id)
-        cur_task[0].done = !cur_task[0].done
+      doneTask(id){
+        this.$store.commit('handleDoneTask', id)
       },
-      handleDeleteTask(id) {
-        this.tasks = this.tasks.filter(task => task.id !== id)
-      }
+      deleteTask(id){
+        this.$store.commit('handleDeleteTask', id)
+      },
     }
   }
 </script>
