@@ -24,7 +24,7 @@ export default new Vuex.Store({
     ]
   },
   mutations: {
-    handleAddTask(state, taskTitle){
+    handleAddTask(state, taskTitle) {
       if (taskTitle !== ''){
         let newTask = {
           id: Date.now(),
@@ -43,7 +43,14 @@ export default new Vuex.Store({
     }
   },
   actions: {
-  },
-  modules: {
+    addTask({ commit }, taskTitle) {
+      commit('handleAddTask', taskTitle)
+    },
+    doneTask({ commit }, id) {
+      commit('handleDoneTask', id)
+    },
+    deleteTask({ commit }, id) {
+      commit('handleDeleteTask', id)
+    }
   }
 })

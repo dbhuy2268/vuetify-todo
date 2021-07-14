@@ -92,14 +92,14 @@
     },
     methods: {
       addTask(){
-        this.$store.commit('handleAddTask', this.taskTitle)
+        this.$store.dispatch('addTask', this.taskTitle)
         this.taskTitle = ''
       },
       doneTask(id){
-        this.$store.commit('handleDoneTask', id)
+        this.$store.dispatch('doneTask', id)
       },
       deleteTask(id){
-        this.$store.commit('handleDeleteTask', id)
+        this.$store.dispatch('deleteTask', id)
       },
     }
   }
