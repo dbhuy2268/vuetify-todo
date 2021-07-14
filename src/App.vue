@@ -52,7 +52,12 @@
     </v-app-bar>
     <v-main>
       <router-view></router-view>
-      <!--  -->
+      <v-snackbar
+          v-model="this.$store.state.snackbar.show"
+          :timeout="timeout"
+      >
+        {{ this.$store.state.snackbar.text}}
+      </v-snackbar>
     </v-main>
   </v-app>
 </template>
@@ -60,6 +65,7 @@
 <script>
 export default {
   data: () => ({
+    timeout: 2000,
     drawer: null,
     items: [
       { title: 'Todo list', icon: 'mdi-format-list-checks', to: '/' },

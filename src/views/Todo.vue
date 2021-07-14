@@ -8,11 +8,10 @@
         append-icon="mdi-plus"
         @click:append="addTask"
         @keyup.enter="addTask"
-        :hide-details="true"
+        hide-details
         clearable
         v-model="taskTitle"
     ></v-text-field>
-
     <v-list
         v-if="$store.state.tasks.length"
         flat
@@ -24,24 +23,34 @@
         <v-list-item
             class="list-action-hover"
             @click="doneTask(item.id)"
-            :class="{'grey lighten-4': item.done}"
+            :class="{'grey lighten-4': item.status}"
         >
           <template v-slot:default>
             <v-list-item-action>
               <v-checkbox
-                  :input-value="item.done"
+                  :input-value="item.status"
                   color="primary"
                   on-icon="mdi-check"
-                  off-icon="checkbox-blank-circle-outline"
-                  disabled
+                  off-icon="mdi-checkbox-blank-circle-outline"
               />
             </v-list-item-action>
 
             <v-list-item-content>
               <v-list-item-title
-                  :class="{'text-decoration-line-through': item.done === true}"
+                  :class="{'text-decoration-line-through': item.status === true}"
               >
-                {{ item.title }}
+                <v-row>
+                  <v-col cols="auto">
+                    <v-text-field v-model="item.description"
+                                  dense
+                                  hide-details
+                                  @click.stop=""
+                                  @change="changeDescription(item.id, item.description)"
+                                  @keyup.enter="changeDescription(item.id, item.description)"
+                                  class="todo-description pb-1"
+                    />
+                  </v-col>
+                </v-row>
               </v-list-item-title>
             </v-list-item-content>
 
@@ -82,18 +91,22 @@
         taskTitle: '',
       }
     },
-    created() {
+    mounted() {
+      this.$store.dispatch('getTasks')
       axios
           .get("https://goquotes-api.herokuapp.com/api/v1/random?count=1")
           .then(response => {
             this.emptyQuote = response.data.quotes[0]
-            console.log(this.emptyQuote)
           });
     },
     methods: {
       addTask(){
-        this.$store.dispatch('addTask', this.taskTitle)
-        this.taskTitle = ''
+        if(this.taskTitle.length){
+          this.$store.dispatch('addTask', this.taskTitle).then(() => {
+            this.$store.dispatch('getTasks')
+          })
+          this.taskTitle = ''
+        }
       },
       doneTask(id){
         this.$store.dispatch('doneTask', id)
@@ -101,6 +114,9 @@
       deleteTask(id){
         this.$store.dispatch('deleteTask', id)
       },
+      changeDescription(id, newDescription) {
+        this.$store.dispatch('changeDescription', { 'id': id, 'description': newDescription })
+      }
     }
   }
 </script>
@@ -111,5 +127,14 @@
   }
   .list-action-hover:hover .hover-close {
     visibility: visible;
+  }
+  .todo-description.v-text-field>.v-input__control>.v-input__slot:before {
+    border-style: none;
+  }
+  .todo-description.v-text-field>.v-input__control>.v-input__slot:after {
+    border-style: none;
+  }
+  .v-ripple__container {
+    opacity: 0.1 !important;
   }
 </style>

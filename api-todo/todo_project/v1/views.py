@@ -7,7 +7,7 @@ from rest_framework import viewsets, status
 
 
 class TaskViewSet(viewsets.ModelViewSet):
-    queryset = Task.objects.all()
+    queryset = Task.objects.all().order_by('-id')
     serializer_class = TaskSerializer
 
     def create(self, request, *args, **kwargs):
