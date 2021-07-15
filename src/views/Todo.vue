@@ -16,14 +16,19 @@
         v-if="$store.state.tasks.length"
         flat
     >
-      <div
+      <draggable
+          :list="this.$store.state.tasks"
+          handle=".handle">
+        <div
           v-for="item in $store.state.tasks"
           :key="item.id"
+          class="handle"
       >
         <v-list-item
-            class="list-action-hover"
+            class="list-action-hover white"
             @click="doneTask(item.id)"
             :class="{'grey lighten-4': item.status}"
+            :ripple="false"
         >
           <template v-slot:default>
             <v-list-item-action>
@@ -67,7 +72,7 @@
         </v-list-item>
         <v-divider></v-divider>
       </div>
-
+      </draggable>
     </v-list>
     <div v-else>
       <p class="font-weight-thin pt-10 pb-0 font-italic pa-3 text-center">
@@ -82,11 +87,16 @@
 
 <script>
   import axios from "axios";
+  import draggable from "vuedraggable"
 
   export default {
+    components: {
+      draggable
+    },
     name: 'Home',
     data() {
       return {
+        drag: false,
         emptyQuote: {},
         taskTitle: '',
       }
@@ -98,6 +108,16 @@
           .then(response => {
             this.emptyQuote = response.data.quotes[0]
           });
+    },
+    computed: {
+      dragOptions() {
+        return {
+          animation: 200,
+          group: "description",
+          disabled: false,
+          ghostClass: "ghost"
+        };
+      }
     },
     methods: {
       addTask(){
@@ -122,6 +142,9 @@
 </script>
 
 <style lang="css">
+  .sortable-ghost {
+    opacity: 0;
+  }
   .hover-close {
     visibility: hidden;
   }
@@ -134,7 +157,7 @@
   .todo-description.v-text-field>.v-input__control>.v-input__slot:after {
     border-style: none;
   }
-  .v-ripple__container {
-    opacity: 0.1 !important;
-  }
+  /*.v-ripple__container {*/
+  /*  opacity: 0.1 !important;*/
+  /*}*/
 </style>

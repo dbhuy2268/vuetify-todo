@@ -1,0 +1,2 @@
+(window["webpackJsonp"]=window["webpackJsonp"]||[]).push([["about"],{f820:function(t,e,n){"use strict";n.r(e);var u=function(){var t=this,e=t.$createElement;t._self._c;return t._m(0)},a=[function(){var t=this,e=t.$createElement,n=t._self._c||e;return n("div",{staticClass:"about pa-6"},[n("h1",[t._v("About vuetify-todo")]),n("a",{attrs:{href:"mailto:huy-db@fujinet.net"}},[t._v("huy-db@fujinet.net")]),t._v(" – v0.0.0.1 ")])}],i=n("2877"),o={},r=Object(i["a"])(o,u,a,!1,null,null,null);e["default"]=r.exports}}]);
+//# sourceMappingURL=about.02977574.js.map

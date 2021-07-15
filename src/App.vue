@@ -48,7 +48,7 @@
 
       <v-spacer></v-spacer>
 
-      <a target="_blank" rel="noopener noreferrer" style="text-decoration: none;" href="https://github.com/dbhuy2268/vuetify-todo/tree/main/src"><v-icon>mdi-github</v-icon></a>
+      <a target="_blank" rel="noopener noreferrer" style="text-decoration: none;" href="https://github.com/dbhuy2268/vuetify-todo/"><v-icon>mdi-github</v-icon></a>
     </v-app-bar>
     <v-main>
       <router-view></router-view>
