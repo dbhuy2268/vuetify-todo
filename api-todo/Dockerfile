@@ -150,5 +150,3 @@ RUN mkdir todo_project
 COPY . /todo_project
 WORKDIR /todo_project
 COPY /todo_project/requirements.txt ./
-RUN pip3 uninstall django
-RUN pip3 install -r requirements.txt
