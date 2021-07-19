@@ -43,15 +43,15 @@ export default new Vuex.Store({
         state.snackbar.text = text
       }, timeout)
     },
-    handleAddTask(state, taskTitle) {
+    async handleAddTask(state, taskTitle) {
       if (taskTitle.length){
         let newTask = {
           description: taskTitle,
           status: false
         }
-      axios.post(`http://127.0.0.1:8000/tasks/`, { description: newTask.description, status: newTask.status })
+      await axios.post(`http://127.0.0.1:8000/tasks/`, { description: newTask.description, status: newTask.status })
         .then(response => {
-          this.state.tasks.unshift(response.data)
+          this.state.tasks.unshift(newTask)
         });
       }
     },
