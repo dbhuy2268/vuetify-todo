@@ -26,7 +26,7 @@
       >
         <v-list-item
             class="list-action-hover white"
-            @click="doneTask(item.id)"
+            @click.exact="doneTask(item.id)"
             :class="{'grey lighten-4': item.status}"
             :ripple="false"
         >
@@ -135,7 +135,12 @@
         this.$store.dispatch('deleteTask', id)
       },
       changeDescription(id, newDescription) {
-        this.$store.dispatch('changeDescription', { 'id': id, 'description': newDescription })
+        if(newDescription.length){
+          this.$store.dispatch('changeDescription', { 'id': id, 'description': newDescription })
+        }
+        else {
+          this.$store.commit('showSnackbar', 'Description can\'t be blank!')
+        }
       }
     }
   }
