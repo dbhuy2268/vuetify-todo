@@ -51,6 +51,7 @@ export default new Vuex.Store({
         }
         await axios.post(`${BASE_URL}/tasks/`, { description: newTask.description, status: newTask.status })
             .then(response => {
+              newTask.id = response.data.id
               this.state.tasks.unshift(newTask)
             });
       }
@@ -98,6 +99,7 @@ export default new Vuex.Store({
     },
     changeDescription({ commit }, payload) {
       commit('handleChangeDescription', payload)
+      commit('showSnackbar', 'Task updated!')
     }
   }
 })

@@ -52,12 +52,7 @@
     </v-app-bar>
     <v-main>
       <router-view></router-view>
-      <v-snackbar
-          v-model="this.$store.state.snackbar.show"
-          :timeout="timeout"
-      >
-        {{ this.$store.state.snackbar.text}}
-      </v-snackbar>
+      <snackbar />
     </v-main>
   </v-app>
 </template>
@@ -72,5 +67,8 @@ export default {
       { title: 'About', icon: 'mdi-help-box', to: '/about' },
     ],
   }),
+  components: {
+    'snackbar': require('@/components/Snackbar.vue').default
+  }
 }
 </script>
