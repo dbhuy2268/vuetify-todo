@@ -4,6 +4,8 @@ import axios from "axios";
 const　BASE_URL = 'http://127.0.0.1:8000'
 Vue.use(Vuex)
 
+// feature D201
+
 export default new Vuex.Store({
   state: {
     tasks: [
