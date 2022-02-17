@@ -4,7 +4,7 @@
     <v-text-field
         class="pa-3"
         outlined
-        label="What needs to be done?"
+        label="What needs to be done??"
         append-icon="mdi-plus"
         @click:append="addTask"
         @keyup.enter="addTask"
