@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import axios from "axios";
-const　BASE_URL = 'http://127.0.0.1:8000'
+const　BASE_URL = 'http://fake-lb-325215849.ap-southeast-1.elb.amazonaws.com'
 Vue.use(Vuex)
 
 export default new Vuex.Store({
