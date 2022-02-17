@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import axios from "axios";
-const　BASE_URL = 'http://fake-lb-325215849.ap-southeast-1.elb.amazonaws.com'
+const　BASE_URL = 'fake-lb-325215849.ap-southeast-1.elb.amazonaws.com'
 Vue.use(Vuex)
 
 export default new Vuex.Store({
